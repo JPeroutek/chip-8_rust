@@ -14,8 +14,8 @@ struct Vm {
 impl Vm {
     fn new() -> Vm {
         Vm {
-            memory: [0; 4096],
-            registers: [0; 16],
+            memory: [0 as u8; 4096],
+            registers: [0 as u8; 16],
             i: 0,
             pc: 0,
             sp: 0,
@@ -27,7 +27,7 @@ impl Vm {
 
     fn run_program(&mut self) -> u8 {
         while self.running {
-            let current_instruction: u16 = 0;
+            let current_instruction: u16 = ((self.memory[self.pc as usize] as u16) << 8) | (self.memory[(self.pc as usize) + 1] as u16);
 
             self.interpret_instruction(current_instruction);
         }
